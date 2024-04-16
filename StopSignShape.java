@@ -67,5 +67,25 @@ public class StopSignShape implements SceneShape
         {
         return polygon.getBounds();
         }
+
+    @Override
+    public int getX() 
+        {
+        return x;
+        }
+
+    @Override
+    public void setPosition(int newX, int newY) 
+        {
+        this.y = newY;
+        this.x = newX;
+        }
+
+    @Override
+    public int getY() 
+        {
+        return y;
+        }
     }
+
 
