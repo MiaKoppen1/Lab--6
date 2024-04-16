@@ -41,4 +41,23 @@ public class HouseShape implements SceneShape
         {
         return bounds;
         }
+
+    @Override
+    public int getX() 
+        {
+        return x;
+        }
+
+    @Override
+    public void setPosition(int newX, int newY) 
+        {
+        this.y = newY;
+        this.x = newX;
+        }
+
+    @Override
+    public int getY() 
+        {
+        return y;
+        }
     }
