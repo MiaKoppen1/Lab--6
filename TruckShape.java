@@ -61,4 +61,24 @@ public class TruckShape implements SceneShape
         // The bounds are calculated to include the body and cargo
         return new Rectangle(x, y, width, width / 2);
         }
+
+    @Override
+    public int getX() 
+        {
+        return x;
+        }
+
+    @Override
+    public void setPosition(int newX, int newY) 
+        {
+        this.y = newY;
+        this.x = newX;
+        }
+
+    @Override
+    public int getY() 
+        {
+        return y;
+        }
     }
+
