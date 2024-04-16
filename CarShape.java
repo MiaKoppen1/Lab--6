@@ -1,4 +1,5 @@
 
+
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
@@ -12,17 +13,11 @@ public class CarShape implements SceneShape
     {
     private int x, y, width;
 
-    /**
-     * Constructs a CarShape object.
-     * @param x the x-coordinate of the top-left corner of the car
-     * @param y the y-coordinate of the top-left corner of the car
-     * @param width the width of the car (height is calculated as a proportion)
-     */
     public CarShape(int x, int y, int width) 
         {
         this.x = x;
         this.y = y;
-        this.width = width;
+        this.width = width;   
         }
 
     @Override
@@ -54,30 +49,46 @@ public class CarShape implements SceneShape
         return new Rectangle2D.Double(x, y, width, width / 2);
         }
 
+        @Override
+        public void drawSelection(Graphics2D g2) {
+            Rectangle2D bounds = getBounds();
+            g2.setColor(Color.GREEN);
+            drawGrabbers(g2, bounds);
+        }
+        
+        private void drawGrabbers(Graphics2D g2, Rectangle2D r) {
+            double x1 = r.getX();
+            double y1 = r.getY();
+            double x2 = x1 + r.getWidth();
+            double y2 = y1 + r.getHeight();
+            final int SIZE = 8;  // Increased size for visibility
+            g2.setColor(Color.BLACK);
+            g2.fill(new Rectangle2D.Double(x1 - SIZE / 2, y1 - SIZE / 2, SIZE, SIZE));
+            g2.fill(new Rectangle2D.Double(x2 - SIZE / 2, y1 - SIZE / 2, SIZE, SIZE));
+            g2.fill(new Rectangle2D.Double(x1 - SIZE / 2, y2 - SIZE / 2, SIZE, SIZE));
+            g2.fill(new Rectangle2D.Double(x2 - SIZE / 2, y2 - SIZE / 2, SIZE, SIZE));
+        }
+        
     @Override
-    public void drawSelection(Graphics2D g2) 
+    public int getX() 
         {
-        Rectangle2D bounds = getBounds();
-        g2.setColor(Color.RED);
-        drawGrabbers(g2, bounds);
+        return x;
         }
 
-    /**
-     * Draws grabbers at each corner of the bounding rectangle.
-     * @param g2 the graphics context
-     * @param r the bounding rectangle
-     */
-    private void drawGrabbers(Graphics2D g2, Rectangle2D r) 
+    @Override
+    public void setPosition(int newX, int newY) 
         {
-        double x1 = r.getX();
-        double y1 = r.getY();
-        double x2 = x1 + r.getWidth();
-        double y2 = y1 + r.getHeight();
-        final int SIZE = 4;
-        g2.setColor(Color.BLACK);
-        g2.fill(new Rectangle2D.Double(x1 - SIZE / 2, y1 - SIZE / 2, SIZE, SIZE));
-        g2.fill(new Rectangle2D.Double(x2 - SIZE / 2, y1 - SIZE / 2, SIZE, SIZE));
-        g2.fill(new Rectangle2D.Double(x1 - SIZE / 2, y2 - SIZE / 2, SIZE, SIZE));
-        g2.fill(new Rectangle2D.Double(x2 - SIZE / 2, y2 - SIZE / 2, SIZE, SIZE));
+        this.y = newY;
+        this.x = newX;
+        }
+
+   
+
+    @Override
+    public int getY() 
+        {
+        return y;
         }
     }
+
+   
